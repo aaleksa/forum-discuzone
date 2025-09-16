@@ -1,0 +1,170 @@
+# 🎨 Forum Design Specification
+
+---
+
+## 🔹 Core Design Principles
+
+- **Minimalism**: A clean, simple interface with no unnecessary elements.
+- **User-Friendly Navigation**: Easy access to main features (posts, comments, filters).
+- **Responsive Design**: Should look good on all devices (desktop, tablet, smartphone).
+- **Intuitive UX**: Users should easily understand how to interact with the forum.
+
+---
+
+## 🧱 Page Structure
+
+### 1. Home Page
+
+**Header**: Forum name and logo
+
+**Navigation Menu**:
+- Link to home
+- "Register" and "Login" buttons (for unauthenticated users)
+- "Create Post" button (for authenticated users)
+- Forum-wide search bar
+
+**Posts List**:
+- Post title
+- Author and creation date
+- Short preview or excerpt
+- Number of comments, likes/dislikes
+- Post categories (tags)
+
+**Filters**:
+- Filter by category
+- Filter by popularity (likes count)
+- Filter by date (newest)
+
+---
+
+### 2. Post Page
+
+- Post title
+- Author and creation date
+- Full post content
+- Categories (tags)
+- Like/Dislike buttons (for authenticated users)
+
+**Comments Section**:
+- Username of commenter
+- Comment text
+- Creation date
+- Like/Dislike buttons (for authenticated users)
+- Comment form (for authenticated users)
+
+---
+
+### 3. Registration / Login Page
+
+**Registration Form**:
+- Email field (with uniqueness check)
+- Username field
+- Password and password confirmation
+- "Register" button
+
+**Login Form**:
+- Email or username
+- Password
+- "Login" button
+- Link to registration page
+
+---
+
+### 4. Create Post Page
+
+**Post Form**:
+- Title field
+- Post content textarea
+- Category selector (multiple selection allowed)
+- "Publish" button
+
+---
+
+### 5. User Profile Page
+
+**User Info**:
+- Avatar (optional)
+- Username
+- Email
+- Registration date
+
+**User Activity**:
+- List of created posts
+- List of liked posts
+- Total likes/dislikes received on posts and comments
+
+---
+
+## 🎨 Color Scheme
+
+**Light Mode:**
+
+- Background: #F8F9FA (light gray / near white)
+- Text: #333333 (dark gray)
+- Accent: #4C9A2A, #76BA1B (green shades for buttons and links)
+- Link color: #007bff (blue)
+- Button color: #4C9A2A
+- Button hover color: #76BA1B
+- Tag color: #A4DE02
+- Meta text color (e.g., dates): #888888 (gray)
+
+**Dark Mode (optional):**
+
+- Background: dark gray or black (not defined yet)
+- Text: light gray or white
+- Accent: sky blue or light green
+*(тут можна додати приклади інтерфейсу або wireframes пізніше)*# Forum Name [Logo]
+
+---
+
+[Search] [Register] [Login] [Create Post]
+
+---
+
+## Filters
+
+- [Categories]  
+- [Popular]  
+- [Newest]  
+
+---
+
+## Posts List
+
+### Post Title 1  
+**Author:** User1 | **Date:** 01.01.2023  
+**Categories:** Programming, Go  
+Short description...  
+**Comments:** 5 | **Likes:** 10 | **Dislikes:** 2  
+
+---
+
+### Post Title 2  
+**Author:** User2 | **Date:** 02.01.2023  
+**Categories:** Design, UI/UX  
+Short description...  
+**Comments:** 3 | **Likes:** 7 | **Dislikes:** 1  
+
+---
+
+# Post Page
+
+## Post Title  
+**Author:** User1 | **Date:** 01.01.2023  
+**Categories:** Programming, Go  
+
+Full post content...
+
+[Like] [Dislike] (10 likes, 2 dislikes)
+
+---
+
+### Comments
+
+- **User2:** Interesting post! [Like] [Dislike] (3 likes)  
+- **User3:** Thanks for the information. [Like] [Dislike] (1 like)  
+
+---
+
+[Add Comment] (form for authenticated users)
+
