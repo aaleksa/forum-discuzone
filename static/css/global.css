@@ -1,0 +1,226 @@
+:root {
+    /* Colors */
+    --primary-color: #1E5631;            /* Main color (e.g., for headings) */
+    --secondary-color: #4C9A2A;      /* Secondary color (e.g., for navigation) */
+    --background-color: #F8F9FA; 
+    --accent-color: #76BA1B;         /* Background color */
+    --like-color: #76BA1B;
+    --like-count-color: #76BA1B;
+    --dislike-color: #e53935;        /* червоний відтінок */
+    --dislike-count-color: #e53935;     
+    --text-color: #333333;            /* Text color */
+    --button-color: #4C9A2A;         /* Button color */
+    --button-hover-color: #76BA1B;/* Button hover color */
+    --tag-color: #A4DE02;   
+    --link-color: #007bff;        /* Link color */
+    --white-color: #fff;          /* White color */
+    --meta-text-color: #888;      /* Meta text color (e.g., dates) */
+    --border-color: #D4EDC9;
+
+    /* Sizes */
+    --header-padding: 20px;       /* Padding for the header */
+    --nav-padding: 10px;          /* Padding for navigation */
+    --button-padding: 10px 15px;  /* Button padding */
+    --border-radius: 4px;         /* Border radius */
+    --post-padding: 15px;         /* Padding for posts */
+    --post-margin-bottom: 15px;   /* Spacing between posts */
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for posts */
+
+    /* Login container */
+    --login-bg-color: #fff;       /* Background color for the container */
+    --login-padding: 20px;        /* Padding for the container */
+    --login-border-radius: 5px;   /* Border radius for the container */
+    --login-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for the container */
+    --login-width: 70%;         /* Container width */
+    --login-text-align: center;   /* Text alignment inside the container */
+
+    /* Fonts */
+    --font-family: 'Roboto', 'Open Sans', Arial, sans-serif; /* Sans-serif fonts */
+    --font-size-heading: 26px;    /* Font size for headings (24-28px) */
+    --font-size-post: 17px;       /* Font size for post text (16-18px) */
+    --font-size-comment: 15px;    /* Font size for comments (14-16px) */
+
+    /* Input and button styles */
+    --input-padding: 10px;
+    --input-border: 1px solid #ccc;
+    --input-border-radius: 5px;
+    --button-bg-color: #007bff;
+    --button-text-color: white;
+    --button-hover-bg-color: #0056b3;
+    --textarea-margin: 25px;
+
+    --header-height: 300px;        
+
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    margin: 0;
+}
+.header-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: 1000;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: var(--header-padding);
+    text-align: center;
+}
+
+h2 {
+    font-family: var(--font-family);
+    color: var(--text-color);
+}
+/* Style for main menu */
+nav {
+    background-color: var(--secondary-color);
+    padding: var(--nav-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a, nav button {
+    color: var(--white-color);
+    text-decoration: none;
+    padding: var(--button-padding);
+    background-color: var(--button-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+nav a:hover, nav button:hover {
+    background-color: var(--button-hover-color);
+}
+
+.main-content {
+    margin-bottom: 20px; 
+    margin-top: calc(var(--header-height));
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+.search-btn {
+    background-color: var(--secondary-color) !important;
+    margin-top: 0 !important;
+}
+.search-btn:hover {
+    background-color: var(--button-hover-color) !important;
+    margin-top: 0 !important;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--meta-text-color);
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.edit-btn:hover {
+    color: var(--white-color);
+    background: var(--secondary-color);
+    transform: rotate(10deg);
+}
+
+.delete-btn:hover {
+    color: var(--white-color);
+    background: var(--accent-color);
+    transform: rotate(10deg);
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 16px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.save-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.reply-btn{
+    background: none;
+    border: none;
+    margin-top: 8px;
+    color: #2d7ff9;
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.reply-btn:hover {
+    background-color: rgba(45, 127, 249, 0.1);
+}
+
+/* Media queries for responsive design */
+
+/* For screens smaller than 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+    :root {
+        --header-padding: 15px;
+        --nav-padding: 8px;
+        --button-padding: 8px 12px;
+        --font-size-heading: 22px; /* Reduce heading size */
+        --font-size-post: 16px;    /* Reduce post text size */
+        --font-size-comment: 14px; /* Reduce comment text size */
+    }
+}
+
+/* For screens smaller than 480px (mobile devices) */
+@media (max-width: 480px) {
+    :root {
+        --header-padding: 10px;
+        --nav-padding: 5px;
+        --button-padding: 6px 10px;
+        --font-size-heading: 20px; /* Even smaller heading size */
+        --font-size-post: 15px;    /* Even smaller post text size */
+        --font-size-comment: 13px; /* Even smaller comment text size */
+    }
+
+    nav a, nav button {
+        margin: 5px; /* Reduce spacing between buttons */
+    }
+}

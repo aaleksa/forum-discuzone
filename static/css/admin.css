@@ -1,0 +1,311 @@
+.admin-panel {
+        max-width: 1400px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+    
+    .admin-panel h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+    }
+    
+    .tables-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+    }
+    
+    .table-wrapper {
+        flex: 1;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        padding: 15px;
+    }
+    
+    .table-wrapper h2 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        padding-left: 10px;
+    }
+    
+    .users-table, .requests-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .users-table th {
+        background-color: #3498db;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+    }
+    
+    .requests-table th {
+        background-color: #4a5568;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+    }
+    
+    .users-table td, .requests-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #e0e0e0;
+        vertical-align: middle;
+    }
+    
+    .users-table tr:nth-child(even), .requests-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    
+    .users-table tr:hover, .requests-table tr:hover {
+        background-color: #f1f7fd;
+    }
+    
+    .role-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .role-form select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+        font-size: 14px;
+    }
+    
+    .role-form button {
+        padding: 8px 16px;
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+    
+    .role-form button:hover {
+        background-color: #27ae60;
+    }
+    
+    /* Стили для разных ролей */
+    .role-user {
+        color: #3498db;
+    }
+    
+    .role-moderator {
+        color: #f39c12;
+    }
+    
+    .role-admin {
+        color: #e74c3c;
+        font-weight: bold;
+    }
+
+    /* Status badges */
+    .status-pending {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        background-color: #f6ad55;
+        color: white;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+    
+    .status-approved {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        background-color: #68d391;
+        color: white;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+    
+    .status-rejected {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        background-color: #fc8181;
+        color: white;
+        font-size: 0.85em;
+        font-weight: 500;
+    }
+    
+    /* Action buttons */
+    .action-form {
+        display: inline-block;
+        margin-right: 8px;
+    }
+    
+    .btn-approve, .btn-reject {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-approve {
+        background-color: #48bb78;
+        color: white;
+    }
+    
+    .btn-approve:hover {
+        background-color: #38a169;
+    }
+    
+    .btn-reject {
+        background-color: #e53e3e;
+        color: white;
+    }
+    
+    .btn-reject:hover {
+        background-color: #c53030;
+    }
+    
+    .no-actions {
+        color: #a0aec0;
+        font-style: italic;
+    }
+
+
+   
+  h1 {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  
+  .categories-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+ 
+  .add-category-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .add-category-form input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .add-category-form button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-category-form button:hover {
+    background-color: #1e7e34;
+  }
+
+ 
+  ul.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 400px;
+    font-family: Arial, sans-serif;
+  }
+
+  ul.category-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ul.category-list form {
+    display: inline;
+  }
+
+  ul.category-list form button {
+    background-color: #dc3545;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  ul.category-list form button:hover {
+    background-color: #a71d2a;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .add-category-form,
+    .category-list {
+      width: 90%;
+    }
+  }
+
+  .banned-label {
+  color: red;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.ban-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.ban-button:hover {
+  background-color: #f9282c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.unban-button {
+  background-color: #4C9A2A;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.unban-button {
+  background-color: #76BA1B;;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}

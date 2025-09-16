@@ -1,0 +1,135 @@
+
+.filters {
+    width: 20%;
+}
+
+.posts {
+    width: 75%;
+}
+.posts-list {
+    list-style-type: none; 
+    padding-left: 0; 
+}
+
+.post {
+    background-color: var(--white-color);
+    padding: var(--post-padding);
+    margin-bottom: var(--post-margin-bottom);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    font-size: var(--font-size-heading);
+    margin: 0;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: var(--meta-text-color);
+}
+
+.post-description {
+    margin-top: 10px;
+    font-size: var(--font-size-post);
+}
+
+.post-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-comment);
+}
+
+.post-footer .tags {
+    color: var(--link-color);
+}
+/*===== Content and action button  for post and comment =======*/
+.comment-content, .post-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*-------------------------------------*/
+
+.filters select {
+    width: 100%;
+    padding: var(--button-padding);
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ccc;
+}
+
+.menu-container {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-right {
+    margin-left: 94px;
+}
+
+.nav-center {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-user-name {
+    /* margin-left: 20px; */
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Медіа-запити для адаптивного дизайну */
+
+/* Для екранів менше 768px (планшети та мобільні пристрої) */
+@media (max-width: 768px) {
+    
+    .main-content {
+        flex-direction: column; /* Змінюємо напрямок на вертикальний */
+    }
+
+    .filters {
+        width: 100%; /* Фільтри займають всю ширину */
+        margin-bottom: 20px;
+    }
+
+    .posts {
+        width: 100%; /* Пости займають всю ширину */
+    }
+
+    .post-title {
+        font-size: var(--font-size-heading);
+    }
+
+    .post-description {
+        font-size: var(--font-size-post);
+    }
+
+    .post-footer {
+        font-size: var(--font-size-comment);
+    }
+}
+
+/* Для екранів менше 480px (мобільні пристрої) */
+@media (max-width: 480px) {
+    .post {
+        padding: 10px; /* Зменшуємо відступи для постів */
+    }
+}

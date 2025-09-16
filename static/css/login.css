@@ -1,0 +1,22 @@
+
+.register-link, .forgot-password {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.register-link a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+.forgot-password a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}

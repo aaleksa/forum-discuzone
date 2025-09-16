@@ -1,0 +1,76 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-button {
+  background-color: var(--white-color);
+  color: var(--text-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  padding: 8px 12px;
+  margin-top: 4px;
+  border-radius: 4px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-toggle:checked + .dropdown-button + .dropdown-menu {
+  display: block;
+}
+
+/* checkbox styles inside*/
+.form-check {
+  margin-bottom: 6px;
+}
+
+.form-check-input {
+  margin-right: 8px;
+}
+
+/* --- Additional styles for the block with checkboxes under the dropdown--- */
+.additional-filters {
+  margin-top: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.additional-filters label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+}
+
+.additional-filters input[type="checkbox"] {
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.filter-tags {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+}
+
+.category-tag {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin: 0 2px;
+}

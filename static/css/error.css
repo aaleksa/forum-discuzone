@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text color */
+    font-family: Arial, sans-serif;
+}
+h1 {
+    font-size: 2em;
+}
+p {
+    font-size: 1.2em;
+}
+a {
+    text-decoration: none;
+    color: #0056b3;
+}
+a:hover {
+    text-decoration: underline;
+}
