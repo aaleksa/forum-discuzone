@@ -1,0 +1,10 @@
+{{define "post_list"}}
+<div class="posts">
+  <h2>All posts</h2>
+  <ul class="posts-list">
+    {{range .}}
+      {{template "post_list_item" .}}
+    {{end}}
+  </ul>
+</div>
+{{end}}

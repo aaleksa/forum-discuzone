@@ -1,0 +1,90 @@
+{{define "title"}}Edit Post{{end}}
+{{define "extra-css"}}
+<link rel="stylesheet" href="/static/css/form.css">
+<link rel="stylesheet" href="/static/css/post.css">
+{{end}}
+{{define "extra-js"}}
+<script src="/static/js/post-form.js"></script>
+<script src="/static/js/select-categories.js"></script>
+<script src="/static/js/image-preview.js"></script>
+{{end}}
+{{define "content"}}
+
+<div class="form-container">
+    <h2>Edit Post</h2>
+    <form method="POST" action="/edit_post/" enctype="multipart/form-data" id="post-form">
+        <input type="hidden" name="id" value="{{.Post.ID}}">
+        <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}">
+
+        <div class="form-group">
+            <label for="title">Post Title</label>
+            <input type="text" id="title" name="title"
+                   value="{{.Post.Title}}"
+                   placeholder="Enter post title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="content">Post Content</label>
+            <textarea id="content" name="content"
+                      placeholder="Write your post here..."
+                      required minlength="20" maxlength="5000" rows="10">{{.Post.Content}}</textarea>
+            <div class="char-counter" id="char-counter">{{len .Post.Content}}/5000 symbols</div>
+        </div>
+
+        <div class="form-group">
+            <label class="section-label">Categories (select up to 3)</label>
+
+            <!-- Checkbox List -->
+            <div class="checkbox-container" id="checkboxContainer">
+                {{ range .Categories }}
+                <div class="form-check">
+                    <input class="form-check-input category-checkbox"
+                           type="checkbox"
+                           name="categories[]"
+                           id="cat-{{ .ID }}"
+                           value="{{ .ID }}"
+                           data-name="{{ .Name }}"
+                           {{ if index $.SelectedCategories .ID }}checked{{ end }}>
+                    <label class="form-check-label" for="cat-{{ .ID }}">
+                        {{ .Name }}
+                    </label>
+                </div>
+                {{ end }}
+            </div>
+
+            <!-- Selected Tags Display -->
+            <div class="selected-container">
+                <div class="selection-info">
+                    <span>Selected: <span id="selectedCount">0</span>/3</span>
+                    <button id="clearSelection" class="btn-clear">Clear all</button>
+                </div>
+                <div id="selectedTags" class="selected-tags"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="tags">Tags (comma separated)</label>
+            <input type="text" id="tags" name="tags"
+                   value="{{ .Tags }}"
+                   placeholder="tag1, tag2, tag3">
+        </div>
+        
+        {{template "images-post" .}}
+
+        <div class="form-hints">
+            <p><strong>Editing tips:</strong></p>
+            <ul>
+                <li>Improve clarity and readability</li>
+                <li>Check for typos and grammar</li>
+                <li>Update outdated information</li>
+                <li>Consider adding relevant tags</li>
+            </ul>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">Update Post</button>
+            <a href="/profile" class="cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+{{end}}

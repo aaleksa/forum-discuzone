@@ -1,0 +1,35 @@
+{{define "post_list_filter"}}
+<div class="posts">
+  <h2>
+    {{if eq .CurrentFilter "my"}}
+      My posts
+    {{else if eq .CurrentFilter "liked"}}
+      Liked posts
+    {{else}}
+      All posts
+    {{end}}
+    {{if .SelectedCategories}}
+      <span class="filter-tags">
+        (Filtered by categories:
+        {{range $index, $catID := .SelectedCategories}}
+          {{$catName := ""}}
+          {{range $.Categories}}
+            {{if eq .ID $catID}}
+              {{$catName = .Name}}
+            {{end}}
+          {{end}}
+          {{if $catName}}
+            <span class="category-tag">{{$catName}}</span>
+            {{if lt $index (len $.SelectedCategories)}}{{end}}
+          {{end}}
+        {{end}})
+      </span>
+    {{end}}
+  </h2>
+  <ul class="posts-list">
+    {{range .Posts}}
+      {{template "post_list_item" .}}
+    {{end}}
+  </ul>
+</div>
+{{end}}

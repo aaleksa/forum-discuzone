@@ -1,0 +1,28 @@
+{{define "content"}}
+<div class="admin-panel">
+<h1>Manage Categories</h1>
+
+<div class="categories-wrapper">
+  <!-- Addition form -->
+  <form class="add-category-form" method="POST" action="/admin/category/create">
+    <input type="text" name="category_name" placeholder="Category name" required>
+    <button type="submit">Add Category</button>
+  </form>
+
+  <!-- List of categories -->
+  <ul class="category-list">
+    {{range .Categories}}
+      <li>
+        {{.Name}}
+        <form method="POST" action="/admin/categories/delete">
+          <input type="hidden" name="category_id" value="{{.ID}}">
+          <button type="submit" onclick="return confirm('Will delete a category {{.Name}}?')">Delete</button>
+        </form>
+      </li>
+    {{else}}
+      <li>There are no categories</li>
+    {{end}}
+  </ul>
+</div>
+</div>
+{{end}}

@@ -1,0 +1,70 @@
+{{define "post_item"}}
+<div class="post-header">
+    <h2 class="post-title">{{.Post.Title}}</h2>
+    <p class="post-meta">Author: {{.Post.UserName}} | Date: {{.Post.CreatedAt}}</p>
+</div>
+<div class="post-content">
+    <p class="post-description">{{.Post.Content}}</p>
+    <div class="post-actions">
+        {{if .CanModifyPost}}
+        <form class="edit-form" action="/edit_post/{{.Post.ID}}" method="GET" onsubmit="return confirm('Are you sure you want to edit this post?')">
+            <button type="submit" class="edit-btn">✏️</button>
+        </form>
+        <form class="delete-form" action="/delete_post/{{.Post.ID}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this post?')">
+                🗑️
+            </button>
+        </form>
+        {{end}}
+    </div>
+</div>
+{{ if .Post.IsEdited }}
+   <span class="edited-label">(Edited)</span>
+{{ end }}
+
+{{ if .Post.ImagePaths }}
+<div class="post-images">
+    {{ range .Post.ImagePaths }}
+    <div class="post-image">
+        <img src="{{ .Path }}" alt="Post image" class="hover-zoom"
+             {{ if .IsPrimary }}style="border: 10px solid #4285f4;" {{ end }}>
+    </div>
+    {{ end }}
+</div>
+{{ end }}
+
+{{if $.CurrentUser}}
+<form action="/like" method="POST">
+    <input type="hidden" name="content_type" value="post">
+    <input type="hidden" name="content_id" value="{{.Post.ID}}">
+    <button type="submit" name="reaction" value="like"
+    class="reaction-btn like-btn {{if eq .UserReaction "like"}}active{{end}}">
+    👍 Like {{.Post.Likes}}
+</button>
+
+<button type="submit" name="reaction" value="dislike"
+    class="reaction-btn dislike-btn {{if eq .UserReaction "dislike"}}active{{end}}">
+    👎 Dislikes {{.Post.Dislikes}}
+</button>
+</form>
+{{else}}
+<div class="reaction-buttons">
+    <button disabled class="inactive">
+        👍 Like {{.Post.Likes}}
+    </button>
+    <button disabled class="inactive">
+        👎 Dislikes {{.Post.Dislikes}}
+    </button>
+</div>
+{{end}}
+<div class="post-footer">
+    <div>Comments: {{.Post.CommentsCount}}</div>
+    <div class="tags">
+        {{range .Tags}}
+        #{{.}}
+        {{end}}
+    </div>
+</div>
+{{end}}
+

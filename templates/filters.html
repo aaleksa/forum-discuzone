@@ -1,0 +1,44 @@
+{{define "extra-css"}}
+    <link rel="stylesheet" href="/static/css/categories.css">
+{{end}}
+{{define "filters"}}
+<form method="GET" action="/filters_page">
+   <h2>Filters</h2>
+	<label for="categoryToggle" class="dropdown-label">Categories:</label>
+    <div class="dropdown">
+        <input type="checkbox" id="categoryToggle" class="dropdown-toggle" hidden>
+        <label for="categoryToggle" class="dropdown-button">Select categories ▼</label>
+
+        <div class="dropdown-menu">
+            {{ range .Categories }}
+            <div class="form-check">
+                <input class="form-check-input category-checkbox" 
+                   type="checkbox"
+                   name="categories[]"
+                   id="cat-{{ .ID }}"
+                   value="{{ .ID }}"
+                   data-name="{{ .Name }}">
+                <label class="form-check-label" for="cat-{{ .ID }}">
+                   {{ .Name }}
+                </label>
+            </div>
+           {{ end }}
+        </div>
+    </div>
+
+	{{if .CurrentUser}}
+    <!--Separate block under the dropdown-->
+    <div class="additional-filters" style="margin-top: 1em;">
+        <label>
+            <input type="checkbox" name="mine" value="true"> My posts
+        </label>
+
+        <label style="margin-left: 1em;">
+            <input type="checkbox" name="liked" value="true"> Liked
+        </label>
+    </div>
+    {{end}}
+
+	<button type="submit" style="display: block; margin-top: 1em;">Filter</button>
+</form>
+{{end}}

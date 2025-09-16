@@ -1,0 +1,131 @@
+{{define "title"}}Profile{{end}}
+
+{{define "extra-css"}}
+<link rel="stylesheet" href="/static/css/profile.css">
+{{end}}
+
+{{define "extra-js"}}
+<script src="/static/js/profile.js"></script>
+<script src="/static/js/moderator-request.js"></script>
+<script src="/static/js/notifications-all.js"></script>
+{{end}}
+
+{{define "content"}}
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="avatar-section">
+      <div class="avatar-container">
+        <div class="avatar">
+          {{ if .User.AvatarPath }}
+            <img src="{{ .User.AvatarPath }}" alt="Avatar">
+          {{ else }}
+            <div class="avatar-placeholder">No Avatar</div>
+          {{ end }}
+        </div>
+        <button id="show-avatar-form" class="avatar-btn" type="button">Change Avatar</button>
+        <form class="avatar-form" id="avatar-form" action="/upload_avatar" method="POST" enctype="multipart/form-data">
+          <input type="file" name="avatar" accept="image/*" required>
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="user-info">
+      <h2>{{ .User.Username }}</h2>
+      <div class="user-meta">
+        <p><i class="fas fa-envelope"></i> {{ .User.Email }}</p>
+        <p><i class="fas fa-calendar-alt"></i> Joined {{ .User.CreatedAt }}</p>
+        <p><i class="fas fa-user-tag"></i> {{.User.Role}}</p>
+      </div>
+    </div>
+  </div>
+
+  {{if eq .CurrentUser.Role "user"}}
+  <div class="moderator-section">
+    <form id="moderator-request-form">
+      <button type="submit">Request moderator status</button>
+    </form>
+    <p id="moderator-message"></p>
+  </div>
+  {{end}}
+
+  <h3>Search in your activity</h3>
+  <form action="/profile_activity_search" method="GET" style="display: flex; gap: 10px; margin-bottom: 15px;">
+    <input type="text" name="query" placeholder="Search by title or content..." 
+           style="padding: 10px; border-radius: 4px; width: 250px;">
+    <select name="type" style="padding: 10px; border-radius: 4px;">
+        <option value="">All Types</option>
+        <option value="post">Posts</option>
+        <option value="comment">Comments</option>
+        <option value="like">Likes</option>
+    </select>
+    <button class="search-btn" type="submit">Search</button>
+  </form>
+
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="created">Created Posts</button>
+    <button class="tab-btn" data-tab="liked">Liked Posts</button>
+    <button class="tab-btn" data-tab="disliked">Disliked Posts</button>
+    <button class="tab-btn" data-tab="user_comments">Comments on Posts</button>
+    <button class="tab-btn" data-tab="notification_list">Notifications</button>
+  </div>
+
+  <div class="tab-content active" id="created-tab">
+    <ul class="activity-list">
+      {{ range .User.CreatedPosts }}
+      <li class="post-item">
+        <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a> 
+        <div class="post-actions">
+          <div class="post-stats">
+            <span class="likes-count"><i class="fas fa-thumbs-up"></i>👍{{.Likes}}</span>
+            <span class="dislikes-count"><i class="fas fa-thumbs-down"></i>👎{{.Dislikes}}</span>
+          </div>
+          <div class="action-buttons">
+            <form action="/edit_post/{{.ID}}" method="GET" onsubmit="return confirm('Are you sure you want to edit this post?')">
+                  <button type="submit" class="edit-btn">✏️</button>
+            </form>
+            <form class="delete-form" action="/delete_post/{{.ID}}" method="POST">
+              <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this post?')">
+                🗑️
+              </button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {{ else }}
+      <li class="no-posts">You have not created any posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <div class="tab-content" id="liked-tab">
+    <ul class="activity-list">
+      {{ range .User.LikedPosts }}
+        <li class="post-item">
+          <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+        </li>
+      {{ else }}
+      <li class="no-posts">No liked posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <div class="tab-content" id="disliked-tab">
+    <ul class="activity-list">
+      {{ range .User.DislikePosts }}
+        <li class="post-item">
+          <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+        </li>
+      {{ else }}
+      <li class="no-posts">No disliked posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+  <div class="tab-content" id="user_comments-tab">
+     {{template "user_comments" .}}
+  </div>
+  <div class="tab-content" id="notification_list-tab">
+     {{template "notification_list" .}}
+  </div>
+</div>
+{{end}}

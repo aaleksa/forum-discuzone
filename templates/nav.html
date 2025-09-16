@@ -1,0 +1,36 @@
+{{define "nav"}}
+<nav>
+    <div class="menu-container">
+    <div class="nav-left">
+        <a href="/">Home</a>
+        
+        {{if .CurrentUser}}
+            <!-- For logged in user -->
+            <a href="/create">Create Post</a>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+            {{if eq .CurrentUser.Role "admin"}}
+                <a href="/admin/users">Admin Panel</a>
+            {{end}}
+        {{else}}
+            <!--For the guest -->
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+            <p>🔒 Guests can only view content.</p>
+        {{end}}
+    </div>
+    <div class="nav-center">
+        {{if .CurrentUser}}
+            <h4 class="nav-user-name">Welcome, {{.CurrentUser.Username}}!</h4>
+        {{end}}
+    </div>
+    </div>
+    
+    <form action="/search" method="GET" style="display: flex;">
+        <div class="nav-right">
+           <input type="text" name="query" placeholder="Search post..." style="padding: 10px; border-radius: 4px;">
+           <button class="search-btn" type="submit">Search</button>
+        </div>
+    </form>
+</nav>
+{{end}}

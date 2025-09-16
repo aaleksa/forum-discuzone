@@ -1,0 +1,22 @@
+{{define "title"}}Create Post{{end}}
+{{define "extra-css"}}
+<link rel="stylesheet" href="/static/css/form.css">
+{{end}}
+{{define "extra-js"}}
+<script src="/static/js/post-form.js"></script>
+<script src="/static/js/image-preview.js"></script>
+<script src="/static/js/select-categories.js"></script>
+{{end}}
+{{define "content"}}
+
+<div class="form-container">
+    <h2>Create a Post</h2>
+    <form action="/createin" method="POST" enctype="multipart/form-data" id="post-form">
+        <input type="hidden" name="csrf_token" value="{{ .CSRFToken }}">
+        
+        {{template "form-group-post" .}}
+        
+        <button type="submit" class="submit-btn">Publish Post</button>
+    </form>
+</div>
+{{end}}

@@ -1,0 +1,20 @@
+{{define "title"}}Search{{end}}
+{{define "extra-css"}}{{end}}
+{{define "extra-js"}}{{end}}
+{{define "content"}}
+
+<h2>Search Results for "{{.Query}}"</h2>
+
+{{if .Message}}
+  <p style="color: gray;">{{.Message}}</p>
+{{end}}
+<ul class="posts-list">
+    {{range .Results}}
+    {{template "post_list_item" .}}
+
+{{else}}
+    <p>No posts found.</p>
+{{end}}
+</ul>
+
+{{end}}

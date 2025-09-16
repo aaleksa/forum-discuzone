@@ -1,0 +1,51 @@
+{{define "notification_list"}}
+<div class="notif-wrapper">
+  <div class="notif-dropdown notif-dropdown--open" style="display: block;">
+    <!-- Header -->
+    <div class="notif-dropdown__header">
+      <button class="notif-mark-read" id="mark-all-read-btn" >Mark all as read</button>
+    </div>
+
+    <!-- List -->
+    <div class="notif-list">
+      {{if .Notifications}}
+        {{range .Notifications}}
+        <div class="notif-item {{if not .IsRead}}notif-item--unread{{end}}" data-id="{{.ID}}">
+          <div class="notif-item__icon">
+            {{if eq .Type "comment"}}
+              <i class="fa-solid fa-comment-dots"></i>
+            {{else if eq .Type "like"}}
+              <i class="fa-solid fa-heart"></i>
+            {{else}}
+              <i class="fa-solid fa-bell"></i>
+            {{end}}
+          </div>
+          <div class="notif-item__content">
+            <p class="notif-text">
+              {{.ActorName}} 
+              {{if eq .Type "comment"}}commented on your post 
+              {{else if eq .Type "like"}}liked your post 
+              {{else if eq .Type "dislike"}}disliked your post 
+              {{else}}did something
+              {{end}}
+              <strong>
+                <a class="notif-post-link" href="/post_page/{{.PostID}}">{{.PostTitle}}</a>
+              </strong>.
+              <small class="notif-time">{{.CreatedAt}}</small> 
+            </p>
+          </div>
+          {{if not .IsRead}}<span class="notif-dot"></span>{{end}}
+        </div>
+        {{end}}
+      {{else}}
+        <p class="notif-empty">No notifications yet.</p>
+      {{end}}
+    </div>
+
+    <!-- Footer -->
+    <!-- <div class="notif-dropdown__footer">
+      <a class="notif-view-all" href="/notifications">View all</a>
+    </div>
+  </div> -->
+</div>
+{{end}}

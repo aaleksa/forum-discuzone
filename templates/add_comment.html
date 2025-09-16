@@ -1,0 +1,23 @@
+{{define "add_comment"}}
+<div class="add-comment">
+  {{if .CurrentUser}}
+    <h3>Add a Comment</h3>
+    <form class="commentForm" action="/create-comment" method="POST">
+      <input type="hidden" name="postId" value="{{.Post.ID}}">
+      <textarea class="commentContent" name="content" placeholder="Write your comment here..."></textarea>
+      <button type="submit">Submit</button>
+
+      <!-- 🚨 Modal for empty comment -->
+      <div class="commentModal modal" style="display:none;">
+        <div class="modal-content">
+          <h2>⚠️ Comment Required</h2>
+          <p>Please write something before submitting your comment.</p>
+          <button type="button" class="closeCommentModalBtn">OK</button>
+        </div>
+      </div>
+    </form>
+  {{else}}
+    <p>You must <a href="/login">log in</a> to leave a comment or like/dislike post.</p>
+  {{end}}
+</div>
+{{end}}

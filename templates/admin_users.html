@@ -1,0 +1,99 @@
+{{define "content"}}
+<div class="admin-panel">
+    <h1>Admin Panel: Manage Users</h1>
+
+    <div class="tables-container">
+        <div class="table-wrapper">
+            <h2>Users Management</h2>
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                    <th>Ban</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Users}}
+                <tr>
+                    <td>{{.Username}}</td>
+                    <td>{{.Email}}</td>
+                    <td class="role-{{.Role}}">{{.Role}}</td>
+                    <td>
+                        <form class="role-form" action="/admin/promote" method="POST">
+                            <input type="hidden" name="userID" value="{{.ID}}">
+                            <select name="role">
+                                <option value="user" {{if eq .Role
+                                "user"}}selected{{end}}>User</option>
+                                <option value="moderator" {{if eq .Role
+                                "moderator"}}selected{{end}}>Moderator</option>
+                                <option value="admin" {{if eq .Role
+                                "admin"}}selected{{end}}>Admin</option>
+                            </select>
+                            <button type="submit">Apply</button>
+                        </form>
+                    </td>
+                    <td>
+                        {{if not .Banned}}
+                        <form class="ban-form" action="/admin/ban" method="POST"
+                              onsubmit="return confirm('Ban {{.Username}}?')">
+                            <input type="hidden" name="user_id" value="{{.ID}}">
+                            <button type="submit" class="ban-button">Ban</button>
+                        </form>
+                        {{else}}
+                        <span class="banned-label">Banned</span>
+                        <form class="unban-form" action="/admin/unban" method="POST"
+                              onsubmit="return confirm('Unban {{.Username}}?')">
+                            <input type="hidden" name="user_id" value="{{.ID}}">
+                            <button type="submit" class="unban-button">Unban</button>
+                        </form>
+                        {{end}}
+                    </td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="table-wrapper">
+            <h2>Moderator Requests</h2>
+            <table class="requests-table">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Requested At</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .ModerationRequests}}
+                <tr>
+                    <td>{{.Username}}</td>
+                    <td><span class="status-{{.Status}}">{{.Status}}</span></td>
+                    <td>{{.RequestedAt}}</td>
+                    <td>
+                        {{if eq .Status "pending"}}
+                        <form action="/admin/moderator/approve" method="POST" class="action-form">
+                            <input type="hidden" name="requestID" value="{{.ID}}">
+                            <button type="submit" class="btn-approve">Approve</button>
+                        </form>
+                        <form action="/admin/moderator/reject" method="POST" class="action-form">
+                            <input type="hidden" name="requestID" value="{{.ID}}">
+                            <button type="submit" class="btn-reject">Reject</button>
+                        </form>
+                        {{else}}
+                        <span class="no-actions">N/A</span>
+                        {{end}}
+                    </td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{end}}

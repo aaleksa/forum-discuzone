@@ -1,0 +1,13 @@
+{{define "header"}}
+<header style="display: flex; justify-content: space-between; align-items: center; position: relative; padding: var(--header-padding); background-color: var(--primary-color); color: var(--white-color);">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <h1 style="margin: 0;">DiscuZone</h1>
+        <img src="/static/img/logo.png" alt="Forum Logo" width="100">
+    </div>
+    {{if .CurrentUser}}
+    <div style="position: absolute; top: var(--header-padding); right: var(--header-padding);">
+        {{template "notifications" .}}
+    </div>
+    {{end}}
+</header>
+{{end}}

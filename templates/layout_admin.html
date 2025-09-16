@@ -1,0 +1,23 @@
+{{ define "layout" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ block "title" . }}Auth{{ end }}</title>
+    <link rel="icon" href="/static/favicon/ms-icon-70x70.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/favicon/ms-icon-70x70.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/global.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div class="header-content">
+        {{template "header_auth" .}}
+        {{template "nav_admin" .}}
+    </div>
+    <div class="main-content">
+        {{template "content" .}}
+    </div>
+</body>
+</html>
+{{ end }}

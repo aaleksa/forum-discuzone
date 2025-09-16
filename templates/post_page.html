@@ -1,0 +1,10 @@
+{{define "title"}}{{.Post.Title}} - Forum{{end}}
+{{define "extra-css"}}<link rel="stylesheet" href="/static/css/post.css">{{end}}
+{{define "extra-js"}}{{end}}
+{{define "content"}}
+  <div class="container">
+    {{template "post_item" .}}
+    {{template "comment" .}}
+    {{template "add_comment" .}}
+  </div>
+{{end}}

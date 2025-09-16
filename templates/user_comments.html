@@ -1,0 +1,26 @@
+{{define "user_comments"}}
+<div class="user-comments">
+  <h2>What I Said on Posts</h2>
+  {{if .PostsWithComment}}
+    {{range .PostsWithComment}}
+      {{if .Comments}}
+        <div class="post-comments-group">
+          <h3 class="post-title">
+            <a href="/post_page/{{.ID}}" class="post-link">🔗 View post: {{.Title}}</a>
+          </h3>
+          <ul class="comment-list">
+            {{range .Comments}}
+              <li class="comment-item">
+                <p class="comment-content">{{.Content}}</p>
+                <small class="comment-time">{{.CreatedAt}}</small>
+              </li>
+            {{end}}
+          </ul>
+        </div>
+      {{end}}
+    {{end}}
+  {{else}}
+    <p>You haven't made any comments yet.</p>
+  {{end}}
+</div>
+{{end}}

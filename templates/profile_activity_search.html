@@ -1,0 +1,187 @@
+{{define "title"}}Search{{end}}
+
+{{define "extra-css"}}
+<link rel="stylesheet" href="/static/css/profile.css">
+{{end}}
+
+{{define "extra-js"}}
+<script src="/static/js/profile.js"></script>
+<script src="/static/js/moderator-request.js"></script>
+<script src="/static/js/notifications-all.js"></script>
+{{end}}
+
+{{define "content"}}
+<div class="profile-container">
+
+  <div class="profile-header">
+    <div class="avatar-section">
+      <div class="avatar-container">
+        <div class="avatar">
+          {{ if .User.AvatarPath }}
+            <img src="{{ .User.AvatarPath }}" alt="Avatar">
+          {{ else }}
+            <div class="avatar-placeholder">No Avatar</div>
+          {{ end }}
+        </div>
+        <button id="show-avatar-form" class="avatar-btn" type="button">Change Avatar</button>
+        <form class="avatar-form" id="avatar-form" action="/upload_avatar" method="POST" enctype="multipart/form-data">
+          <input type="file" name="avatar" accept="image/*" required>
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="user-info">
+      <h2>{{ .User.Username }}</h2>
+      <div class="user-meta">
+        <p><i class="fas fa-envelope"></i> {{ .User.Email }}</p>
+        <p><i class="fas fa-calendar-alt"></i> Joined {{ .User.CreatedAt }}</p>
+        <p><i class="fas fa-user-tag"></i> {{.User.Role}}</p>
+      </div>
+    </div>
+  </div>
+
+  {{if eq .CurrentUser.Role "user"}}
+  <div class="moderator-section">
+    <form id="moderator-request-form">
+      <button type="submit">Request moderator status</button>
+    </form>
+    <p id="moderator-message"></p>
+  </div>
+  {{end}}
+
+  <!-- Search Activity Form -->
+  <h3>Search in your activity</h3>
+  <form action="/profile_activity_search" method="GET" style="display: flex; gap: 10px; margin-bottom: 15px;">
+    <input type="text" name="query" placeholder="Search by title or content..." 
+           value="{{.Query}}" style="padding: 10px; border-radius: 4px; width: 250px;">
+    <select name="type" style="padding: 10px; border-radius: 4px;">
+        <option value="" {{if eq .FilterType ""}}selected{{end}}>All Types</option>
+        <option value="post" {{if eq .FilterType "post"}}selected{{end}}>Posts</option>
+        <option value="comment" {{if eq .FilterType "comment"}}selected{{end}}>Comments</option>
+        <option value="like" {{if eq .FilterType "like"}}selected{{end}}>Likes</option>
+    </select>
+    <button class="search-btn" type="submit">Search</button>
+  </form>
+
+  <!-- Tabs for Activity -->
+  <div class="profile-tabs">
+    <button class="tab-btn active" data-tab="search_results">Search Results</button>
+    <button class="tab-btn" data-tab="created">Created Posts</button>
+    <button class="tab-btn" data-tab="liked">Liked Posts</button>
+    <button class="tab-btn" data-tab="disliked">Disliked Posts</button>
+    <button class="tab-btn" data-tab="user_comments">Comments on Posts</button>
+    <button class="tab-btn" data-tab="notification_list">Notifications</button>
+  </div>
+
+  <!-- Search Results Tab -->
+  <div class="tab-content active" id="search_results-tab">
+    <h3>Search Results for "{{.Query}}"{{if .FilterType}} ({{.FilterType}}){{end}}</h3>
+    {{if .Message}}
+      <div class="alert">{{.Message}}</div>
+    {{end}}
+
+    {{if .Results.Posts}}
+    <section>
+        <h4>Posts</h4>
+        <ul class="activity-list">
+            {{range .Results.Posts}}
+            <li class="post-item">
+                <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+                <span>{{.CreatedAt}}</span>
+            </li>
+            {{end}}
+        </ul>
+    </section>
+    {{end}}
+
+    {{if .Results.Comments}}
+    <section>
+        <h4>Comments</h4>
+        <ul class="activity-list">
+            {{range .Results.Comments}}
+            <li class="post-item">
+                <p>{{.Content}}</p>
+                <small>On <a class="post-link" href="/post_page/{{.PostID}}">{{.PostTitle}}</a> at {{.CreatedAt}}</small>
+            </li>
+            {{end}}
+        </ul>
+    </section>
+    {{end}}
+
+    {{if .Results.Likes}}
+    <section>
+        <h4>Liked Posts</h4>
+        <ul class="activity-list">
+            {{range .Results.Likes}}
+            <li class="post-item">
+                <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+                <span>{{.CreatedAt}}</span>
+            </li>
+            {{end}}
+        </ul>
+    </section>
+    {{end}}
+  </div>
+
+  <!-- Other Tabs -->
+  <div class="tab-content" id="created-tab">
+    <ul class="activity-list">
+      {{ range .User.CreatedPosts }}
+      <li class="post-item">
+        <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a> 
+        <div class="post-actions">
+          <div class="post-stats">
+            <span class="likes-count"><i class="fas fa-thumbs-up"></i>👍{{.Likes}}</span>
+            <span class="dislikes-count"><i class="fas fa-thumbs-down"></i>👎{{.Dislikes}}</span>
+          </div>
+          <div class="action-buttons">
+            <form action="/edit_post/{{.ID}}" method="GET">
+              <button type="submit" class="edit-btn">✏️</button>
+            </form>
+            <form class="delete-form" action="/delete_post/{{.ID}}" method="POST">
+              <button type="submit" class="delete-btn">🗑️</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {{ else }}
+      <li class="no-posts">You have not created any posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <div class="tab-content" id="liked-tab">
+    <ul class="activity-list">
+      {{ range .User.LikedPosts }}
+        <li class="post-item">
+          <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+        </li>
+      {{ else }}
+        <li class="no-posts">No liked posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <div class="tab-content" id="disliked-tab">
+    <ul class="activity-list">
+      {{ range .User.DislikePosts }}
+        <li class="post-item">
+          <a class="post-link" href="/post_page/{{.ID}}">{{.Title}}</a>
+        </li>
+      {{ else }}
+        <li class="no-posts">No disliked posts yet.</li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <div class="tab-content" id="user_comments-tab">
+    {{template "user_comments" .}}
+  </div>
+
+  <div class="tab-content" id="notification_list-tab">
+    {{template "notification_list" .}}
+  </div>
+
+</div>
+{{end}}

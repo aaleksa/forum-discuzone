@@ -1,0 +1,26 @@
+{{define "images-post"}}
+<div class="form-group">
+    <label>Current Images</label>
+    {{ if .Post.ImagePaths }}
+    <div class="post-images" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+        {{ range .Post.ImagePaths }}
+        <div class="post-image" style="position: relative;">
+            <label style="display: flex; align-items: center; gap: 4px; font-size: 12px; margin-top: 4px;">
+                <input type="checkbox" name="remove_images[]" value="{{ .ID }}"> Remove
+            </label>
+            <img src="{{ .Path }}" alt="Post image" class="hover-zoom" style="max-width: 150px; border-radius: 4px;">
+        </div>
+        {{ end }}
+    </div>
+    {{ else }}
+    <p>No images currently attached.</p>
+    {{ end }}
+
+    <label for="post-image">Add Images (optional)</label>
+    <input type="file" id="post-image" name="images[]" accept="image/*" multiple />
+    <div class="image-preview-container" id="image-preview" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+    <div id="primary-image-selector"></div>
+    <small class="form-text">Max 5 images (20MB each) | Formats: JPEG, PNG, GIF</small>
+    <input type="hidden" id="primary-image-index" name="primaryImageIndex" value="0" />
+</div>
+{{end}}

@@ -1,0 +1,42 @@
+{{define "post_list_item"}}
+<li class="post">
+    <div class="post-header">
+        <h2 class="post-title">
+            <a href="/post_page/{{.ID}}" class="post-link">{{.Title}}</a>
+        </h2>
+        <p class="post-meta">Author: {{.UserName}} | Date: {{.CreatedAt}}</p>
+    </div>
+    <div class="post-content">
+        <p class="post-description">{{.Content}}</p>
+        <div class="post-actions">
+            {{if and .CurrentUser (or (eq .CurrentUser.Role "moderator") (eq .CurrentUser.Role "admin"))}}
+            <form class="delete-form" action="/delete_post/{{.ID}}" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="delete-btn"
+                        onclick="return confirm('Are you sure you want to delete this post?')">
+                    🗑️
+                </button>
+            </form>
+            {{end}}
+        </div>
+
+    </div>
+
+    {{if .ImagePaths}}
+    <div class="post-images">
+        {{range .ImagePaths}}
+        <div class="post-image">
+            <img src="{{.Path}}" alt="Post image" class="hover-zoom"
+                 {{if .IsPrimary}}style="border: 2px solid #4285f4;" {{end}}>
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+    <div class="post-footer">
+        <div>Comments: {{.CommentsCount}} | Likes: {{.Likes}} | Dislikes: {{.Dislikes}}</div>
+        <div class="tags">
+            {{range .Tags}}#{{.}} {{end}}
+        </div>
+    </div>
+</li>
+{{end}}
